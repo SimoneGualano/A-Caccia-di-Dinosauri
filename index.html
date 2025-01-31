@@ -413,17 +413,18 @@ function updateJoystickDirection(event) {
 }
 
 // Aggiungi eventi per il movimento del joystick
-joystick.addEventListener('mousedown', () => {
+joystick.addEventListener('touchstart', () => {
     isJoystickActive = true;
 });
 
-document.addEventListener('mousemove', (event) => {
+document.addEventListener('touchmove', (event) => {
     if (isJoystickActive) {
-        updateJoystickDirection(event);
+        const touch = event.touches[0]; // Prende il primo tocco
+        updateJoystickDirection(touch);
     }
 });
 
-document.addEventListener('mouseup', () => {
+document.addEventListener('touchend', () => {
     isJoystickActive = false;
     joystickKnob.style.transform = 'translate(-50%, -50%)'; // Reset del joystick
 });
